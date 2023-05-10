@@ -1,0 +1,19 @@
+
+body {
+    background-image: url("./fondo_landing.png");
+    background-size: cover;
+  }
+
+.lan_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+  
+.lanBtn {
+    height: 50px;
+    width: 120px;
+    font-size: 30px;
+}
+  
