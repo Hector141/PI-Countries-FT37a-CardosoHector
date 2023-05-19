@@ -1,0 +1,129 @@
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.select-wrapper select {
+  display: none;
+}
+
+.select-selected {
+  display: block;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.select-selected:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #333;
+  pointer-events: none;
+}
+
+.select-items {
+  position: absolute;
+  background-color: #fff;
+  display: none;
+  z-index: 1;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+
+.select-items div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.select-items div:hover {
+  background-color: #f4f4f4;
+}
+
+.select-items.active {
+  display: block;
+}
+
+
+.select-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+  
+}
+
+
+
+.select-items div:hover {
+  background-color: #e2e2e2;
+}
+
+
+input[type="text"],
+input[type="range"] {
+  margin-bottom: 20px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.season, h2 , label, .respuesta{
+  color: white;
+}
+.season{
+  margin-bottom: 5px;
+}
+
+.error{
+  color: red;
+  margin: 1px;
+}
+
+.contenedor_form {
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 600px;
+  width: 400px;
+  padding: 20px;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 100px;
+
+}
+
+
+.cont_form{
+  background-image: url("./actividad1.jpg");
+  background-size: 100%; /* Añade esta línea */
+  background-repeat: no-repeat; /* Añade esta línea */
+  background-position: center center; /* Añade esta línea */
+  width: 100%;
+  height: 100vh;
+}
+

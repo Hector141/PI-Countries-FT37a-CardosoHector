@@ -1,0 +1,51 @@
+.footer {
+  margin-top: 20px;
+  background-color: rgba(151, 182, 240, 0.7);
+  padding: 10px 20px;
+  text-align: center;
+  width: 100%;
+  position: fixed; /* Modifica esta línea */
+  bottom: 0px;
+}
+
+
+.gitima {
+  height: 40px;
+  width: 40px;
+  left: 150px;
+  position: absolute;
+  border-radius: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.linkenima {
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  position: absolute;
+  left: 80px; /* Ajusta este valor según el espacio deseado */
+  margin-bottom: 5px;
+  transition: opacity 0.3s ease;
+
+}
+
+.gitima:hover,
+.linkenima:hover {
+  opacity: 0.7;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rights {
+  margin-right: 10px;
+}
+
+.links a {
+  margin-right: 10px;
+  color: #333;
+  text-decoration: none;
+}

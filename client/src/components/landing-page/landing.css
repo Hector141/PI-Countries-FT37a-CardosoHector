@@ -1,19 +1,37 @@
-
-body {
-    background-image: url("./fondo_landing.png");
-    background-size: cover;
-  }
-
 .lan_cont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
+  background: url("./fondo2.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden; /* Agrega esta línea */
 }
-  
+
+.h1_count {
+  margin: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Arial', sans-serif;
+  font-size: 50px;
+  color: #333;
+}
+
+
 .lanBtn {
-    height: 50px;
-    width: 120px;
-    font-size: 30px;
+  height: 50px;
+  width: 200px;
+  font-size: 30px;
+  background-color: #0c93d1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
 }
-  
+
+.lanBtn:hover {
+  background-color: #ff7700;
+}
+

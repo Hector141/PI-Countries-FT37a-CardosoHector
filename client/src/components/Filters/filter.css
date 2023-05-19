@@ -1,0 +1,20 @@
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+  }
+  
+  .filter_contenedor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .select_activities,
+  .select_population,
+  .select_alph,
+  .select_all {
+    padding: 5px;
+  }
+  

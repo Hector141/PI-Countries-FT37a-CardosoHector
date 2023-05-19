@@ -2,13 +2,13 @@ const { Activity, Country } = require("../db");
 
 
 const createActivity = async (req, res) => {
-    const { name, difficulty, duration, season, countries } = req.body;
+    const { name, dificulty, duration, season, countries } = req.body;
   
     try {
       // Crear la actividad turística en la base de datos
       const newActivity = await Activity.create({
         name,
-        difficulty,
+        dificulty,
         duration,
         season
       });
@@ -42,6 +42,7 @@ const createActivity = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
+
 
 module.exports = {
     createActivity, getActivities

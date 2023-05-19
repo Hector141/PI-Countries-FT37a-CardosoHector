@@ -79,7 +79,27 @@ const getCountriesByName = async (req, res) => {
   }
 };
 
-module.exports = { getCountries, getCountryById, getCountriesByName };
+
+const CountriesActivity = async (req, res) => {
+  try {
+    const countries = await Country.findAll({
+      include: Activity, // Incluir las actividades relacionadas
+    });
+
+    // Filtrar los países que tienen actividades asociadas
+    const countriesWithActivities = countries.filter(country => country.activities.length > 0);
+
+    res.json(countriesWithActivities);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+
+
+module.exports = { getCountries, getCountryById, getCountriesByName,CountriesActivity };
 
 
 

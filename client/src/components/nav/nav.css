@@ -1,0 +1,17 @@
+.nav{
+    background-color:rgba(151, 182, 240, 0.7);
+    height: 50px;
+    
+}
+
+.home{
+    position: absolute;
+    height: 40px;
+    width: 100px;
+    top: 2px;
+    margin-left: 100px;
+    border-radius: 10px;
+    background-color:rgb(223, 222, 222);
+    color: black;
+    transition: background-color 0.3s ease;
+}
