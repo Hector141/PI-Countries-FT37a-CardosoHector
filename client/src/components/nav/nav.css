@@ -1,6 +1,7 @@
 .nav{
-    background-color:rgba(151, 182, 240, 0.7);
-    height: 50px;
+    background-image: url("./fondo.jpg");
+    background-size: cover;
+    height: 70px;
     
 }
 
@@ -8,10 +9,12 @@
     position: absolute;
     height: 40px;
     width: 100px;
-    top: 2px;
+    top: 15px;
     margin-left: 100px;
     border-radius: 10px;
     background-color:rgb(223, 222, 222);
-    color: black;
+    color: #8E44AD;
+    font-weight: bold;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }

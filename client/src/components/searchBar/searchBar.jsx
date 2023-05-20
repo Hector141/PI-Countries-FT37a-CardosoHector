@@ -53,7 +53,7 @@ const SearchBar = () => {
       <div className="search_contenedor">
         <input
           className="buscador"
-          placeholder="Busque el pais deseado..."
+          placeholder="Busque el pais deseado... ej: Argentina"
           type="text"
           value={searchTerm}
           onChange={handleSearchTermChange}
