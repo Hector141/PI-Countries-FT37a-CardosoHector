@@ -83,7 +83,6 @@ export const fetchCountriesByName = (name) => {
         payload: response.data,
       });
     } catch (error) {
-      // Aquí puedes propagar el error y manejarlo en el componente SearchBar
       throw error;
     }
   };
@@ -95,12 +94,12 @@ export const createActivity = (activityData) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('http://localhost:3001/activities', activityData);
-      console.log(response.data); // Opcional: puedes hacer algo con la respuesta del backend si lo deseas
+      console.log(response.data); // Opcional puedes hacer algo con la respuesta del backend si lo deseas
 
       // Dispatch de la acción con el tipo correspondiente
       dispatch({
         type: CREATE_ACTIVITY,
-        payload: response.data.message // Puedes ajustar el payload según la respuesta del backend
+        payload: response.data.message
       });
     }catch (error) {
       console.log('Error al crear la actividad:', error.response.data.error);

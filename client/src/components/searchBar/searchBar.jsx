@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {
   fetchCountriesByName,
-  // ...importa otras acciones necesarias
 } from '../../redux/actions';
 import './searchBar.css';
 

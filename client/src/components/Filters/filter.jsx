@@ -6,7 +6,6 @@ import {
   fetchAllCountries,
   setCountryOrderAlph,
   filterCountriesByActivity,
-  // ...importa otras acciones necesarias
 } from '../../redux/actions';
 import './filter.css';
 

@@ -92,10 +92,10 @@
             };
 
             case CREATE_ACTIVITY:
-              const { name, dificulty, duration, season, countries } = action.payload; // Utilizar "dificulty" aquí
+              const { name, dificulty, duration, season, countries } = action.payload;
               const newActivity = {
                 name: name,
-                dificulty: dificulty, // Utilizar "dificulty" aquí
+                dificulty: dificulty, 
                 duration: duration,
                 season: season,
                 countries: countries
