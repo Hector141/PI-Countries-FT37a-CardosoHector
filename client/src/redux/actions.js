@@ -5,7 +5,7 @@ import {ALL_COUNTRIES ,ALL_COUNTRIES_FAIL, FETCH_COUNTRY_DETAIL,  ORDER_BY_POPUL
 
 
 export const fetchAllCountries = () => {
-  return async (dispatch) => {
+  return async (dispatch) => { //si o si se usa porque redux no permite retornar directamente
     try {
       const response = await axios.get('http://localhost:3001/countries');
       dispatch({

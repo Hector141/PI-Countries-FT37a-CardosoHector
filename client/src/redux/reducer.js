@@ -114,6 +114,18 @@
 
                case FILTER_COUNTRIES_BY_ACTIVITY:
                    const activityName = action.payload;
+
+                   if (activityName === 'All') {
+                    const filteredCountries = state.allCountries.filter(country =>
+                      country.activities.length > 0
+                    );
+                    
+                    return {
+                      ...state,
+                      filteredCountries
+                    };
+                  }
+                  
                 // Filtrar los países según la actividad seleccionada
                 const filteredCountries = state.allCountries.filter(country =>
                  country.activities.some(activity => activity.name === activityName)

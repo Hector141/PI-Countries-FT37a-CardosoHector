@@ -8,11 +8,16 @@ const Form = () => {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.allCountries);
 
-  const [name, setName] = useState('');
-  const [dificulty, setDificulty] = useState('');
-  const [duration, setDuration] = useState('');
-  const [season, setSeason] = useState('');
-  const [countries, setCountries] = useState([]);
+  const [activityData, setActivityData] = useState({
+    name: '',
+    dificulty: '',
+    duration: '',
+    season: '',
+    countries: [],
+  });
+
+  const { name, dificulty, duration, season, countries } = activityData;
+
   const [isOpen, setIsOpen] = useState(false);
   const [isCountrySelected, setIsCountrySelected] = useState(false);
   const selectRef = useRef(null);
@@ -67,7 +72,10 @@ const Form = () => {
   const handleCountryChange = (countryId) => {
     const isCountrySelected = countries.includes(countryId);
     if (!isCountrySelected) {
-      setCountries((prevCountries) => [...prevCountries, countryId]);
+      setActivityData({
+        ...activityData,
+        countries: [...countries, countryId],
+      });
       setIsCountrySelected(true);
     }
   };
@@ -81,14 +89,21 @@ const Form = () => {
   const handleFieldChange = (event) => {
     // Reiniciar el estado de errores al modificar los campos
     setError({});
+
+    setActivityData({
+      ...activityData,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const resetForm = () => {
-    setName('');
-    setDificulty('');
-    setDuration('');
-    setSeason('');
-    setCountries([]);
+    setActivityData({
+      name: '',
+      dificulty: '',
+      duration: '',
+      season: '',
+      countries: [],
+    });
     setIsCountrySelected(false);
   };
 
@@ -119,11 +134,9 @@ const Form = () => {
             <input
               type="text"
               id="name"
+              name="name"
               value={name}
-              onChange={(event) => {
-                handleFieldChange(event);
-                setName(event.target.value);
-              }}
+              onChange={handleFieldChange}
               required
             />
           </div>
@@ -134,14 +147,12 @@ const Form = () => {
               <input
                 type="range"
                 id="dificulty"
+                name="dificulty"
                 value={dificulty}
                 min="1"
                 max="5"
                 step="1"
-                onChange={(event) => {
-                  handleFieldChange(event);
-                  setDificulty(event.target.value);
-                }}
+                onChange={handleFieldChange}
                 required
               />
               Hard
@@ -154,11 +165,9 @@ const Form = () => {
               <input
                 type="text"
                 id="duration"
+                name="duration"
                 value={duration}
-                onChange={(event) => {
-                  handleFieldChange(event);
-                  setDuration(event.target.value);
-                }}
+                onChange={handleFieldChange}
                 required
               />
               Hours
@@ -175,10 +184,7 @@ const Form = () => {
                   name="season"
                   value={seasonOption}
                   checked={season === seasonOption}
-                  onChange={(event) => {
-                    handleFieldChange(event);
-                    setSeason(event.target.value);
-                  }}
+                  onChange={handleFieldChange}
                   required
                 />
                 <label htmlFor={seasonOption}>{seasonOption}</label>
@@ -194,6 +200,6 @@ const Form = () => {
       </form>
     </div>
   );
-   }
+};
 
-  export default Form
+export default Form;

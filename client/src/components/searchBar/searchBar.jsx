@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {
   fetchCountriesByName,
-  getActivities,
   // ...importa otras acciones necesarias
 } from '../../redux/actions';
 import './searchBar.css';
@@ -13,16 +12,8 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
   const [errors, setErrors] = useState([]);
-  const allActivities = useSelector((state) => state.allActivities);
+ 
 
-  useEffect(() => {
-    if (!allActivities.length) {
-      dispatch(getActivities())
-        .catch((error) => {
-          console.log('Error al obtener las actividades:', error);
-        });
-    }
-  }, [allActivities, dispatch]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
