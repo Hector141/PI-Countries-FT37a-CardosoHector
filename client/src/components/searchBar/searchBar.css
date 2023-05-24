@@ -1,7 +1,7 @@
 .searchBar {
     background-image: url("./fondo.jpg");
     background-size: cover;
-    height: 70px;
+    height: 85px;
   }
   
   .search_contenedor {
@@ -52,8 +52,7 @@
   
   .error_search{
     position: absolute;
-    left: 10px;
-    margin-top: 10px;
+    margin-top: 55px;
     color: red;
     font-weight: bold;
     

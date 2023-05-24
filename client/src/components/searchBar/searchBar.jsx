@@ -57,7 +57,7 @@ const SearchBar = () => {
           </div>
         )}
       </div>
-      <NavLink to="/form"><button className="form">Crear Actividad</button></NavLink>
+      <NavLink to="/form"><button className="form">Create Activity</button></NavLink>
     </div>
   );
 };

@@ -14,7 +14,8 @@
   .select_activities,
   .select_population,
   .select_alph,
-  .select_all {
+  .select_all, 
+  .clear_filters_button {
     background-color: transparent;
     color: #8E44AD; /* Color celeste claro */
     border: 1px solid transparent; /* Borde transparente */
@@ -25,4 +26,14 @@
 
   select option {
     font-weight: bold;
+  }
+
+  .clear_filters_button{
+    border: #8E44AD 3px solid;
+  }
+
+  .clear_filters_button:hover {
+    background-color: #8E44AD; /* Color de fondo oscuro en hover */
+    color: #FFF; /* Color de texto en hover */
+    transition: all 0.5s;
   }

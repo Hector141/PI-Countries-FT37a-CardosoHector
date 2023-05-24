@@ -47,7 +47,7 @@ const axios = require("axios")
 // });
 
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   server.listen(3001, async () => {
     try {
       const allCountries = await Country.findAll();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   orderByPopulation,
@@ -6,6 +6,7 @@ import {
   fetchAllCountries,
   setCountryOrderAlph,
   filterCountriesByActivity,
+  getActivities
 } from '../../redux/actions';
 import './filter.css';
 
@@ -18,6 +19,15 @@ const Filter = () => {
   const filteredCountries = useSelector((state) => state.filteredCountries);
   const allActivities = useSelector((state) => state.allActivities);
 
+
+  useEffect(() => {
+    if (!allActivities.length) {  //Obtiene todas la actividades en el select sin necesidad de agregar otra para que cargen
+      dispatch(getActivities())
+        .catch((error) => {
+          console.log('Error al obtener las actividades:', error);
+        });
+    }
+  }, [allActivities, dispatch]);
 
 
   const handleOrderPopulation = (event) => {
@@ -58,8 +68,8 @@ const Filter = () => {
     <div className="filter">
       <div className="filter_contenedor">
         <select className="select_activities" onChange={handleActivityChange} defaultValue="">
-          <option value="" disabled>Selecciona una actividad</option>
-          <option value="All">Todas las actividades</option>
+          <option value="" disabled>Select Activity</option>
+          <option value="All">All Activities</option>
           {[...new Set(allActivities.map((activity) => activity.name))].map((name, index) => (
             <option key={index} value={name}>
               {name}
@@ -126,6 +136,9 @@ const Filter = () => {
             South America
           </option>
         </select>
+        <button className="clear_filters_button" value="All" key="All" onClick={handleContinentChange}>
+       Clean Filters
+      </button>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@
 
   
 .cont_det {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color:rgba(47, 13, 61, 1);
     width: 600px;
     height: 350px;
     position: absolute;
@@ -40,7 +40,6 @@
   
 .h, .detail_h1{
     transition: 1.5s all;
-    text-shadow: 2px 2px 0 rgb(245, 15, 15);
     color: white;
     margin: 10px;
 }
@@ -53,6 +52,9 @@
   margin: 100px;
   padding: 10px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(47, 13, 61, 1);
 }
 
+.ul_actividades{
+  color: white;
+}

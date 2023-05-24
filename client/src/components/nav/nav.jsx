@@ -13,7 +13,7 @@ const Nav = () => {
       </NavLink>
       {!hideFormLink && (
         <NavLink to="/form">
-          <button className="form">Crear Actividad</button>
+          <button className="form">Create Activity</button>
         </NavLink>
       )}
     </div>

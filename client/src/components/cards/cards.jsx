@@ -1,28 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllCountries, filterByContinent } from '../../redux/actions';
+import { fetchAllCountries } from '../../redux/actions';
 import Card from '../card/card';
 import './cards.css';
-import SearchBar from '../searchBar/searchBar';
-import Filter from '../Filters/filter';
 
 const Cards = () => {
   const allCountries = useSelector((state) => state.allCountries);
   const filteredCountries = useSelector((state) => state.filteredCountries);
   const continent = useSelector((state) => state.continent);
   const dispatch = useDispatch();
-  const allActivities = useSelector((state) => state.allActivities);
   
 
   useEffect(() => {
     dispatch(fetchAllCountries());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (continent === 'All') {
-      dispatch(filterByContinent('All'));
-    }
-  }, [continent, dispatch]);
 
   const countriesToShow = continent === 'All' ? allCountries : filteredCountries;
 
@@ -47,12 +39,6 @@ const Cards = () => {
 
   return (
     <div className="cards-container">
-      <div className="search-container">
-        <SearchBar className="search" />
-      </div>
-      <div className="search-container">
-      <Filter allActivities={allActivities} />
-      </div>
       <div className="card-container">
         {currentItems.map((item) => (
           <Card key={item.id} item={item} />

@@ -25,12 +25,12 @@ const Detail = () => {
         <h2 className="h">Population: {countryDetail?.population}</h2>
         <div className='act_cont'>
         <h2 >Activities:</h2>
-        <ul className='actividades'>
+        <ul className='ul_actividades'>
           {countryDetail?.activities?.map((activity) => (
           <li key={activity.id}>
           Name: {activity.name}<br />
           Dificulty: {activity.dificulty}<br />
-          Duration: {activity.duration}<br />
+          Duration: {activity.duration} Hours<br />
           Season: {activity.season}
         </li>
           ))}

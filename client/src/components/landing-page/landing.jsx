@@ -7,7 +7,7 @@ const Landing = () => {
     <div className='lan_cont'>
       <h1 className='h1_count'>COUNTRIES OF THE WORLD</h1>
       <NavLink to="/home" className="lanBtn">
-        <button className='lanBtn'>Ingresar</button>
+        <button className='lanBtn'>Welcome</button>
       </NavLink>
 
       <Footer className="landing-footer"/>

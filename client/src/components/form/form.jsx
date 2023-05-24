@@ -132,6 +132,7 @@ const Form = () => {
           <div>
             <label htmlFor="name">Name: </label>
             <input
+              autoComplete="off"
               type="text"
               id="name"
               name="name"
@@ -163,6 +164,7 @@ const Form = () => {
             <label htmlFor="duration">
               Duration:
               <input
+               autoComplete="off"
                 type="text"
                 id="duration"
                 name="duration"

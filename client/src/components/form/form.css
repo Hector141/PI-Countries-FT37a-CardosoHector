@@ -118,11 +118,11 @@ button[type="submit"]:hover {
 }
 
 
-.cont_form{
+.cont_form {
   background-image: url("./actividad1.jpg");
-  background-size: 100%; /* Añade esta línea */
-  background-repeat: no-repeat; /* Añade esta línea */
-  background-position: center center; /* Añade esta línea */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   width: 100%;
   height: 100vh;
 }

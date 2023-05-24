@@ -1,19 +1,15 @@
 import axios from 'axios';
-import {ALL_COUNTRIES ,ALL_COUNTRIES_FAIL, FETCH_COUNTRY_DETAIL,  ORDER_BY_POPULATION, FILTER_BY_CONTINENT, SET_ALL_COUNTRIES
+import {ALL_COUNTRIES ,ALL_COUNTRIES_FAIL, FETCH_COUNTRY_DETAIL,  ORDER_BY_POPULATION, FILTER_BY_CONTINENT
 ,FETCH_COUNTRIES_BY_NAME, CREATE_ACTIVITY, SET_COUNTRY_ORDER,  GET_ACTIVITIES, FILTER_COUNTRIES_BY_ACTIVITY} from "./actios-types";
 
 
 
-export const fetchAllCountries = () => {
-  return async (dispatch) => { //si o si se usa porque redux no permite retornar directamente
+export const fetchAllCountries = () => {    //si o si se usa porque redux no permite retornar directamente. porque es un codigo que requiere un tiempo en resolverse
+  return async (dispatch) => {
     try {
       const response = await axios.get('http://localhost:3001/countries');
       dispatch({
         type: ALL_COUNTRIES,
-        payload: response.data,
-      });
-      dispatch({
-        type: SET_ALL_COUNTRIES,
         payload: response.data,
       });
     } catch (error) {
@@ -24,7 +20,6 @@ export const fetchAllCountries = () => {
     }
   };
 };
-
 
 
 export const fetchCountryDetail = (id) => {
@@ -77,7 +72,7 @@ export const setCountryOrderAlph = (order) => {
 export const fetchCountriesByName = (name) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`http://localhost:3001/countries/?name=${name}`);
+      const response = await axios.get(`http://localhost:3001/countries/name?name=${name}`);
       dispatch({
         type: FETCH_COUNTRIES_BY_NAME,
         payload: response.data,
@@ -94,12 +89,11 @@ export const createActivity = (activityData) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('http://localhost:3001/activities', activityData);
-      console.log(response.data); // Opcional puedes hacer algo con la respuesta del backend si lo deseas
 
       // Dispatch de la acción con el tipo correspondiente
       dispatch({
         type: CREATE_ACTIVITY,
-        payload: response.data.message
+        payload: response.data.message 
       });
     }catch (error) {
       console.log('Error al crear la actividad:', error.response.data.error);
