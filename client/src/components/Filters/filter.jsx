@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   orderByPopulation,
@@ -6,20 +6,23 @@ import {
   fetchAllCountries,
   setCountryOrderAlph,
   filterCountriesByActivity,
-  getActivities
+  getActivities,
 } from '../../redux/actions';
 import './filter.css';
 
 const Filter = () => {
   const dispatch = useDispatch();
   const orderPopulation = useSelector((state) => state.orderPopulation);
-  const ordenAlph = useSelector((state) => state.ordenAlph);
+  const orderAlph = useSelector((state) => state.orderAlph);
   const continent = useSelector((state) => state.continent);
   const allCountries = useSelector((state) => state.allCountries);
-  const filteredCountries = useSelector((state) => state.filteredCountries);
   const allActivities = useSelector((state) => state.allActivities);
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [lastOrderPopulation, setLastOrderPopulation] = useState(orderPopulation);
+  const [lastOrderAlph, setLastOrderAlph] = useState(orderAlph);
 
 
+  //--------------actividades----------------------------
   useEffect(() => {
     if (!allActivities.length) {  //Obtiene todas la actividades en el select sin necesidad de agregar otra para que cargen
       dispatch(getActivities())
@@ -30,44 +33,91 @@ const Filter = () => {
   }, [allActivities, dispatch]);
 
 
+  //-------------contries-------------------------
+
+  useEffect(() => {
+    let filtered = [...allCountries];
+
+    if (continent !== 'All') {
+      filtered = filtered.filter((country) => country.continent === continent);
+    }
+
+    setFilteredCountries(filtered);
+  }, [allCountries, continent]);
+
+
+
+  //------------------ordenamientos----------------------------------
   const handleOrderPopulation = (event) => {
     const order = event.target.value;
-    if (filteredCountries.length > 0) {
-      dispatch(orderByPopulation(order));
-    } else {
-      dispatch(orderByPopulation(order, allCountries));
-    }
+    setLastOrderPopulation(order);
+    dispatch(orderByPopulation(order, filteredCountries));
   };
 
-  const handleContinentChange = (event) => {
-    const selectedContinent = event.target.value;
-    if (selectedContinent === 'All') {
-      dispatch(fetchAllCountries());
-    } else {
-      dispatch(filterByContinent(selectedContinent));
-    }
+
+
+
+  const handleOrderAlph = (event) => {
+    const order = event.target.value;
+    setLastOrderAlph(order);
+    dispatch(setCountryOrderAlph(order, filteredCountries));
   };
 
-  const handleOrdenAlph = (event) => {
-    const orden = event.target.value;
-    if (filteredCountries.length > 0) {
-      dispatch(setCountryOrderAlph(orden));
-    } else {
-      dispatch(setCountryOrderAlph(orden, allCountries));
-    }
-  };
+//-----------------filtros-------------------------------------
+
+const handleContinentChange = (event) => {
+  const selectedContinent = event.target.value;
+  if (selectedContinent === "All") {
+    dispatch(fetchAllCountries());
+    dispatch(filterByContinent("All Contries"))
+  } else {
+    dispatch(filterByContinent(selectedContinent));
+  }
+};
+
 
   const handleActivityChange = (event) => {
     const activityName = event.target.value;
-   
-      dispatch(filterCountriesByActivity(activityName));
-  
- }
+    dispatch(filterCountriesByActivity(activityName));
+  };
 
+
+    useEffect(() => {
+    // Aplicar automáticamente los filtros de orden
+    
+
+    if (lastOrderPopulation) {
+      dispatch(orderByPopulation(lastOrderPopulation, filteredCountries));
+    }
+    if (lastOrderAlph) {
+      dispatch(setCountryOrderAlph(lastOrderAlph, filteredCountries));
+    }
+   
+  }, [ lastOrderPopulation, lastOrderAlph, filteredCountries, dispatch]);
+
+  //---------Limpieza de filtros----------------
+
+
+
+
+  const handleClearFilters = () => {
+    dispatch(fetchAllCountries());
+    dispatch(filterByContinent("All Contries"))
+    setLastOrderPopulation('');
+    dispatch(orderByPopulation("", filteredCountries));
+    setLastOrderAlph('');    
+    dispatch(setCountryOrderAlph("", filteredCountries));
+  };
+  
+
+  
+
+
+  
   return (
     <div className="filter">
       <div className="filter_contenedor">
-        <select className="select_activities" onChange={handleActivityChange} defaultValue="">
+        <select className="select_activities" onChange={handleActivityChange} defaultValue={""}>
           <option value="" disabled>Select Activity</option>
           <option value="All">All Activities</option>
           {[...new Set(allActivities.map((activity) => activity.name))].map((name, index) => (
@@ -83,25 +133,27 @@ const Filter = () => {
           value={orderPopulation}
           onChange={handleOrderPopulation}
         >
+          <option value="" disabled>Orden Population</option>
           <option value="Max" key="Max">
-            Max population
+            Max Population
           </option>
           <option value="Min" key="Min">
-            Min population
+            Min Population
           </option>
         </select>
 
         <select
           className="select_alph"
-          name="ordenAplh"
-          value={ordenAlph}
-          onChange={handleOrdenAlph}
+          name="orderAlph"
+          value={orderAlph}
+          onChange={handleOrderAlph}
         >
+         <option value="" disabled>Orden Alphabetically</option>
           <option value="asc" key="asc">
-            alphabetically Asd
+            Alphabetically Asc
           </option>
-          <option value="des" key="des">
-            alphabetically Des
+          <option value="desc" key="desc">
+            Alphabetically Desc
           </option>
         </select>
 
@@ -112,7 +164,7 @@ const Filter = () => {
           onChange={handleContinentChange}
         >
           <option value="All" key="All">
-            All continents
+            All Continents
           </option>
           <option value="Africa" key="Africa">
             Africa
@@ -136,12 +188,13 @@ const Filter = () => {
             South America
           </option>
         </select>
-        <button className="clear_filters_button" value="All" key="All" onClick={handleContinentChange}>
-       Clean Filters
-      </button>
+
+        <button className="clear_filters_button" value="All" key="All" onClick={handleClearFilters}>
+          Clear Filters
+        </button>
       </div>
     </div>
   );
- }  
+};
 
 export default Filter;

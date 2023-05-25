@@ -15,24 +15,40 @@ const Form = () => {
     season: '',
     countries: [],
   });
-
   const { name, dificulty, duration, season, countries } = activityData;
 
+
+// Estado para controlar la apertura y cierre del dropdown
   const [isOpen, setIsOpen] = useState(false);
   const [isCountrySelected, setIsCountrySelected] = useState(false);
   const selectRef = useRef(null);
+
   const [activityMessage, setActivityMessage] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({
+    name: '',
+    dificulty: '',
+    duration: '',
+    season: '',
+    countries: '',
+  });
 
   useEffect(() => {
     dispatch(fetchAllCountries());
   }, [dispatch]);
 
+
+  // Manejo del dropdown
   const handleDocumentClick = (event) => {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
       setIsOpen(false);
     }
   };
+
+// Alternar el estado del dropdown
+  const toggleDropdown = () => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  };
+
 
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
@@ -41,6 +57,8 @@ const Form = () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,19 +70,19 @@ const Form = () => {
       countries,
     };
 
-    const errors = Validate(newActivity);
-    if (Object.keys(errors).length === 0) {
+    const validationErrors = Validate(newActivity);
+    if (Object.keys(validationErrors).length === 0) {
       setActivityMessage('Se creó la actividad correctamente.');
 
       try {
-        await dispatch(createActivity(newActivity));
-        await dispatch(getActivities());
-        resetForm(); // Reiniciar los campos después de enviar el formulario
+       await dispatch(createActivity(newActivity));
+       await dispatch(getActivities());
+        resetForm();
       } catch (error) {
         console.log('Error al crear o obtener las actividades:', error);
       }
     } else {
-      setError(errors);
+      setErrors(validationErrors);
       setActivityMessage('No se pudo crear la actividad.');
     }
   };
@@ -80,20 +98,30 @@ const Form = () => {
     }
   };
 
-  const toggleDropdown = () => {
-    setIsOpen((prevIsOpen) => !prevIsOpen);
-  };
-
   const seasons = ['Summer', 'Autumn', 'Winter', 'Spring'];
 
   const handleFieldChange = (event) => {
-    // Reiniciar el estado de errores al modificar los campos
-    setError({});
+    const { name, value } = event.target;
 
-    setActivityData({
-      ...activityData,
-      [event.target.name]: event.target.value,
-    });
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: '',
+    }));
+
+    setActivityData((prevActivityData) => ({
+      ...prevActivityData,
+      [name]: value,
+    }));
+  };
+
+  const handleBlur = (event) => {
+    const { name } = event.target;
+
+    const newErrors = Validate(activityData);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: newErrors[name] || '',
+    }));
   };
 
   const resetForm = () => {
@@ -106,6 +134,7 @@ const Form = () => {
     });
     setIsCountrySelected(false);
   };
+
 
   return (
     <div className="cont_form">
@@ -128,7 +157,8 @@ const Form = () => {
               ))}
             </div>
           </div>
-          {error.countries && <p className="error">{error.countries}</p>}
+          <p className='respuesta'>{activityData.countries}</p>
+          {errors.countries && <p className="error">{errors.countries}</p>}
           <div>
             <label htmlFor="name">Name: </label>
             <input
@@ -138,10 +168,11 @@ const Form = () => {
               name="name"
               value={name}
               onChange={handleFieldChange}
+              onBlur={handleBlur}
               required
             />
+            {errors.name && <p className="error">{errors.name}</p>}
           </div>
-          {error.name && <p className="error">{error.name}</p>}
           <div>
             <label htmlFor="dificulty">
               Difficulty: Easy
@@ -154,28 +185,30 @@ const Form = () => {
                 max="5"
                 step="1"
                 onChange={handleFieldChange}
+                onBlur={handleBlur}
                 required
               />
               Hard
             </label>
+            {errors.dificulty && <p className="error">{errors.dificulty}</p>}
           </div>
-          {error.dificulty && <p className="error">{error.dificulty}</p>}
           <div>
             <label htmlFor="duration">
               Duration:
               <input
-               autoComplete="off"
+                autoComplete="off"
                 type="text"
                 id="duration"
                 name="duration"
                 value={duration}
                 onChange={handleFieldChange}
+                onBlur={handleBlur}
                 required
               />
               Hours
             </label>
+            {errors.duration && <p className="error">{errors.duration}</p>}
           </div>
-          {error.duration && <p className="error">{error.duration}</p>}
           <div>
             <p className="season">Season:</p>
             {seasons.map((seasonOption) => (
@@ -187,13 +220,14 @@ const Form = () => {
                   value={seasonOption}
                   checked={season === seasonOption}
                   onChange={handleFieldChange}
+                  onBlur={handleBlur}
                   required
                 />
                 <label htmlFor={seasonOption}>{seasonOption}</label>
               </div>
             ))}
+            {errors.season && <p className="error">{errors.season}</p>}
           </div>
-          {error.season && <p className="error">{error.season}</p>}
           <div>
             <button type="submit">Create Activity</button>
           </div>

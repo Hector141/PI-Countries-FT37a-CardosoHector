@@ -11,7 +11,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/countries', getCountries);
-router.get('/countries/name', getCountriesByName);  ///countries/name?name=Bermuda
+router.get('/countries/name', getCountriesByName);  //countries/name?name=Bermuda
 router.get('/countries/:idPais', getCountryById);   //countries/id
 
 

@@ -29,7 +29,7 @@ const Detail = () => {
           {countryDetail?.activities?.map((activity) => (
           <li key={activity.id}>
           Name: {activity.name}<br />
-          Dificulty: {activity.dificulty}<br />
+          Difficulty: {activity.dificulty}<br />
           Duration: {activity.duration} Hours<br />
           Season: {activity.season}
         </li>

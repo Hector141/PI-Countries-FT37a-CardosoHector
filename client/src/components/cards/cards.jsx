@@ -5,9 +5,7 @@ import Card from '../card/card';
 import './cards.css';
 
 const Cards = () => {
-  const allCountries = useSelector((state) => state.allCountries);
   const filteredCountries = useSelector((state) => state.filteredCountries);
-  const continent = useSelector((state) => state.continent);
   const dispatch = useDispatch();
   
 
@@ -16,7 +14,7 @@ const Cards = () => {
   }, [dispatch]);
 
 
-  const countriesToShow = continent === 'All' ? allCountries : filteredCountries;
+  const countriesToShow = filteredCountries;
 
   const itemsPerPage = 10; 
   const [currentPage, setCurrentPage] = useState(1);

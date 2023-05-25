@@ -34,7 +34,6 @@ const createActivity = async (req, res) => {
 
   const getActivities = async (req, res) => {
     try {
-      // Obtener todas las actividades turísticas
       const activities = await Activity.findAll();
   
       res.json(activities);
@@ -44,8 +43,9 @@ const createActivity = async (req, res) => {
   };
 
 
-  
 
+
+  
 
 
 module.exports = {

@@ -48,17 +48,16 @@ const getCountriesByName = async (req, res) => {
     let countries;
     
     if (name) {
-      // Filtrar por nombre si se proporciona
       countries = await Country.findAll({
         where: {
           name: {
             [Op.iLike]: `${name}%` // Realizar búsqueda insensible a mayúsculas/minúsculas
           }
         },
-        include: Activity // Incluir las actividades relacionadas
+        include: Activity 
       });
     } else {
-      // Obtener todos los países sin filtrar
+  
       countries = await Country.findAll({ include: Activity });
     }
     
