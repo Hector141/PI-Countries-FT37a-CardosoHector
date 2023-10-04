@@ -24,13 +24,13 @@ const Filter = () => {
 
   //--------------actividades----------------------------
   useEffect(() => {
-    if (!allActivities.length) {  //Obtiene todas la actividades en el select sin necesidad de agregar otra para que cargen
+    if (!allActivities || !allActivities.length) {
       dispatch(getActivities())
         .catch((error) => {
           console.log('Error al obtener las actividades:', error);
         });
     }
-  }, [allActivities, dispatch]);
+  }, [dispatch]);
 
 
   //-------------contries-------------------------
