@@ -20,6 +20,7 @@
 const server = require('./src/app.js');
 const { conn, Country } = require('./src/db.js');
 const axios = require("axios")
+require('dotenv').config()
 
 //Syncing all the models at once.                 // VER SI DEJAS CACA O MOVER ;D
 // conn.sync({ force: false }).then(() => {
@@ -48,7 +49,7 @@ const axios = require("axios")
 
 
 conn.sync({ force: false }).then(async () => {
-  server.listen(3001, async () => {
+  server.listen(process.env.PORT, async () => {
     try {
       const allCountries = await Country.findAll();
       if (!allCountries.length) {
